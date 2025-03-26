@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>Editar Persona</h1>
+    <div>
+      Nombre: <input id="nombre" value="<%= persona.nombre %>" /><br />
+      Apellido: <input id="apellido" value="<%= persona.apellido %>" /><br />
+      Genero:
+      <select id="genero">
+        <option value="M">M</option>
+        <option value="F">F</option></select
+      ><br />
+      Edad: <input id="edad" value="<%= persona.edad %>" /><br />
+
+      <button onclick="window.location.href='/persona'">Cancelar</button>
+      <button onclick="Guardar('<%= persona.id_persona %>')">Guardar</button>
+    </div>
+    <script>
+      window.addEventListener('load', function () {
+        let genero = '<%= persona.genero%>';
+        let genero_select = document.getElementById('genero');
+        genero_select.selectedIndex = [...igenero.options].findIndex(
+          (option) => option.text === genero
+        );
+      });
+
+      function Guardar(id) {
+        const requestOptions = {
+          method: 'put',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre: document.getElementById('nombre').value,
+            apellido: document.getElementById('apellido').value,
+            genero: document.getElementById('genero').value,
+            edad: document.getElementById('edad').value,
+          }),
+        };
+        fetch('/persona/' + id, requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.result == 'success') {
+              window.location.href = '/persona';
+            } else {
+              alert('Surgió un error al actualizar la información');
+            }
+          });
+      }
+    </script>
+  </body>
+</html>

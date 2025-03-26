@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Lista de Personas</h1>
+
+    <table style="border: solid 1px #000">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Genero</th>
+        <th>Edad</th>
+        <th>Acciones</th>
+      </tr>
+      <% listaPersonas.forEach(function(persona){ %>
+      <tr>
+        <td><%= persona.nombre %></td>
+        <td><%= persona.apellido %></td>
+        <td><%= persona.genero %></td>
+        <td><%= persona.edad %></td>
+        <td>
+          <button onclick="editar('<%= persona.id_persona%>')">Editar</button> |
+          <button onclick="Eliminar('<%= persona.id_persona%>')">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <% }) %>
+    </table>
+
+    <script>
+      function editar(id) {
+        window.location.href = '/persona/' + id;
+      }
+      function Eliminar(id) {
+        const requestOptions = {
+          method: 'delete',
+        };
+        fetch('/persona/' + id, requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.result == 'success') {
+              window.location.href = '/persona';
+            } else {
+              alert('Surgió un error al eliminar');
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
