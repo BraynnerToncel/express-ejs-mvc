@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    NO AUTORIZADO
+
+    <br />
+
+    <button onclick="CerrarSesion()">Cerrar Sesión</button>
+
+    <script>
+      function CerrarSesion() {
+        const requestOptions = {
+          method: 'POST',
+        };
+        fetch('/user/logout', requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('data login...', data);
+            if (data.success) {
+              //window.sessionStorage.setItem('auth-token', data['accessToken'])
+
+              window.location.href = '/login';
+              //alert(data.success)
+            } else {
+              alert(data.error);
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
