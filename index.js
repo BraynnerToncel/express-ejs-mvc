@@ -18,7 +18,7 @@ server.use('/persona', personaRouter);
 server.use('/user', userRouter);
 server.use('/admin', adminRouter);
 
-server.get('/', (req, res) => {
+server.get('/login', (req, res) => {
   res.render('index');
 });
 

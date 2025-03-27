@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso Denegado</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+      .container {
+        background: #ffdddd;
+        color: #d8000c;
+        padding: 20px;
+        border-radius: 10px;
+        display: inline-block;
+      }
+    </style>
+    <script>
+      setTimeout(() => {
+        window.history.back(); // Regresa a la página anterior después de 5 segundos
+      }, 5000);
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚫 Acceso Denegado</h1>
+      <p>No tienes permisos para acceder a esta página.</p>
+      <p>Serás redirigido en <span id="countdown">5</span> segundos...</p>
+    </div>
+
+    <script>
+      let seconds = 5;
+      setInterval(() => {
+        if (seconds > 1) {
+          seconds--;
+          document.getElementById('countdown').innerText = seconds;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

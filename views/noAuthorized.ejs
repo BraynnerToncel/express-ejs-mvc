@@ -10,7 +10,7 @@
 
     <br />
 
-    <a onclick="CerrarSesion()">Cerrar Sesión</a>
+    <button onclick="CerrarSesion()">Cerrar Sesión</button>
 
     <script>
       function CerrarSesion() {
@@ -24,7 +24,7 @@
             if (data.success) {
               //window.sessionStorage.setItem('auth-token', data['accessToken'])
 
-              window.location.href = '/';
+              window.location.href = '/login';
               //alert(data.success)
             } else {
               alert(data.error);

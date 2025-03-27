@@ -3,9 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Administración</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      body {
+        background: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .toolbar {
+        background: #008191;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .toolbar-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 10px 15px;
+        background-color: #fff;
+        color: #008191;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #f1f1f1;
+      }
+
+      .content {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+      }
+    </style>
   </head>
   <body>
-    <h1>Adminstracion</h1>
+    <div class="toolbar">
+      <h1>Administración</h1>
+      <div class="toolbar-buttons">
+        <button class="btn" onclick="Reportes()">Reportes</button>
+        <button class="btn" onclick="CerrarSesion()">Cerrar Sesión</button>
+      </div>
+    </div>
+    <div class="content">
+      <p>Bienvenido al panel de administración</p>
+    </div>
   </body>
+  <script>
+    function CerrarSesion() {
+      fetch('/user/logout', { method: 'POST' })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            window.location.href = '/login';
+          } else {
+            alert(data.error);
+          }
+        });
+    }
+
+    function Reportes() {
+      window.location.href = '/admin/reportes';
+    }
+  </script>
 </html>

@@ -29,6 +29,7 @@ export class adminController {
   }
 
   static async getUsers(req, res) {
+    res.render('admin/getUsers');
     const data = await userModel.getUsers();
     if (data) {
       res.json({ success: 'OK', data: data.rows });
